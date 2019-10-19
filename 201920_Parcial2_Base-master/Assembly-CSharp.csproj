@@ -72,9 +72,12 @@
     <Compile Include="Assets\Scripts\Game\AI\IsTaggedActorNear.cs" />
     <Compile Include="Assets\Scripts\Game\AI\StandBy.cs" />
     <Compile Include="Assets\Scripts\Game\AIController.cs" />
+    <Compile Include="Assets\Scripts\Game\CanvasManager.cs" />
     <Compile Include="Assets\Scripts\Game\GameController.cs" />
     <Compile Include="Assets\Scripts\Game\HumanController.cs" />
     <Compile Include="Assets\Scripts\Game\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Game\PowInv.cs" />
+    <Compile Include="Assets\Scripts\Game\PowRush.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/santy/OneDrive/Desktop/U/Scripting/201920_Parcial2_Base-master/201920_Parcial2_Base-master/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

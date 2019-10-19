@@ -9,28 +9,43 @@ public abstract class PlayerController : MonoBehaviour
     [SerializeField]
     private float stopTime = 3F;
 
+    private bool active = true;
+
     protected NavMeshAgent agent { get; set; }
 
-    public bool IsTagged { get; protected set; }
+    private bool isTagged = false;
+    private bool visible = true;
+
+    public bool IsTagged { get => isTagged; set => isTagged = value; }
+    public bool Visible { get => visible; set => visible = value; }
 
     public void SwitchRoles()
     {
         IsTagged = !IsTagged;
 
-        // Pause all logic and restart after
+        if(IsTagged)
+        {
+            visible = true;
+            StartCoroutine("StopLogic");
+        }
     }
 
     public void GoToLocation(Vector3 location)
     {
-        agent.SetDestination(location);
+        if(active)
+        {
+            agent.SetDestination(location);
+        }
     }
 
     public virtual IEnumerator StopLogic()
     {
         // Stop BT runner if AI player, else stop movement.
+        active = false;
 
         yield return new WaitForSeconds(stopTime);
-        
+
+        active = true;
         // Restart stuff.
     }
 
@@ -44,11 +59,15 @@ public abstract class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        SwitchRoles();
-
-        if (IsTagged)
+        if(collision.gameObject.tag == "Player" && !IsTagged && active && collision.gameObject == GameController.Instance.TaggedPlayer)
         {
-            StopLogic(); 
+            SwitchRoles();
+
+            GameController.Instance.Tag(gameObject);
+        }
+        else if(collision.gameObject.tag == "Player" && IsTagged)
+        {
+            SwitchRoles();
         }
     }
 }

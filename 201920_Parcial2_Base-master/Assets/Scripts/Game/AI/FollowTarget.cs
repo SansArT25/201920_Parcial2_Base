@@ -4,6 +4,6 @@ public class FollowTarget : Node
 {
     public override void Execute()
     {
-        throw new System.NotImplementedException();
+        GetComponent<AIController>().GoToLocation(GetComponent<AIController>().Target.transform.position);
     }
 }
